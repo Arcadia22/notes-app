@@ -611,9 +611,17 @@ function EntryCard({ entry, category, onEdit, onDelete, onMoveStatus, onTap }) {
             // Check if this metric has per-season data (it's the companion to seasons)
             const PER_SEASON_METRICS = ["episodes", "chapters", "pages", "volumes", "parts", "books", "quantity"];
             const hasPerSeason = epsPerSeason?.length > 0 && PER_SEASON_METRICS.includes(metricId) && entry.status === "current";
+            // Per-book: pages metric shows the CURRENT book's pages up top (total lives in the bottom block)
+            const hasPerBook = metricId === "pages" && entry.booksData?.length > 0 && entry.status === "current";
+            const currentBookIdx = Number(entry.progress?.books || 1) - 1;
+            const pagesInCurrentBook = hasPerBook ? Number(entry.booksData[currentBookIdx]?.pages || 0) : 0;
 
             let display;
-            if (hasPerSeason) {
+            if (hasPerBook) {
+              display = pagesInCurrentBook > 0
+                ? `${isSet(prog) ? prog : 0} / ${pagesInCurrentBook}`
+                : isSet(prog) ? `${prog}` : "0";
+            } else if (hasPerSeason) {
               const seasonIdx = (Number(currentSeason) || 1) - 1;
               const inSeason = epsPerSeason[seasonIdx];
               display = isSet(inSeason)
@@ -633,7 +641,7 @@ function EntryCard({ entry, category, onEdit, onDelete, onMoveStatus, onTap }) {
                 <span className="text-xs text-brand-600 dark:text-brand-300 font-medium tabular-nums flex-1">
                   {display}{" "}
                   <span className="font-normal text-brand-400 dark:text-brand-500">
-                    {hasPerSeason ? `${label.toLowerCase()} this season` : label.toLowerCase()}
+                    {hasPerBook ? `${label.toLowerCase()} this book` : hasPerSeason ? `${label.toLowerCase()} this season` : label.toLowerCase()}
                   </span>
                 </span>
                 {entry.status === "current" && (

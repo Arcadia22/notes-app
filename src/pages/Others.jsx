@@ -2,6 +2,7 @@ import { useState } from "react";
 import PageLayout from "../components/PageLayout";
 import AddictionCounterApp from "../components/AddictionCounterApp";
 import KanjiOfTheDayApp from "../components/KanjiOfTheDayApp";
+import DiaperTrackerApp from "../components/DiaperTrackerApp";
 
 // Registry of mini-apps available in the Others page.
 // Add new mini-components here as they're built.
@@ -19,6 +20,13 @@ const MINI_APPS = [
     icon: "🈷️",
     description: "Learn one kanji a day with readings and meanings",
     component: KanjiOfTheDayApp,
+  },
+  {
+    id: "diaper-tracker",
+    name: "Gan Tracker",
+    icon: "🧷",
+    description: "Track diaper counts and Friday Shabbat pairs for the gan",
+    component: DiaperTrackerApp,
   },
 ];
 
