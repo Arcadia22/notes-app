@@ -1,0 +1,15 @@
+{
+  "WorkspaceID": "dv.ws.fab683ea-c820-4725-bfa2-053791bcb8f1",
+  "RepoID": "dv.repo.c33b1869-6422-4e8b-b607-e252a01df2bc",
+  "Path": "C:\\Users\\raque\\notes-app",
+  "AccountID": "Google_103873890234864654679",
+  "BranchID": "dv.branch.1",
+  "BranchName": "main",
+  "CommitID": "dv.commit.2",
+  "Paused": false,
+  "ShouldDownload": false,
+  "RepoName": "chaosManager",
+  "ReadOnly": false,
+  "DigestMethod": "sha1",
+  "OrganizationTier": "EDUCATION"
+}

@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-pixel: "Press Start 2P", "Courier New", monospace;
+  --font-title: Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  --color-brand-50:  #faf7fd;
+  --color-brand-100: #f0e8fa;
+  --color-brand-200: #ddc9f2;
+  --color-brand-300: #c4a3e8;
+  --color-brand-400: #a878d8;
+  --color-brand-500: #8a52c4;
+  --color-brand-600: #6f38a8;
+  --color-brand-700: #56278a;
+  --color-brand-800: #3c1968;
+  --color-brand-900: #240f44;
+  --color-brand-950: #150828;
+
+  --color-accent-300: #93c5e8;
+  --color-accent-400: #5fa3d6;
+  --color-accent-500: #3d82bd;
+  --color-accent-600: #2d6a9f;
+  --color-accent-700: #1e5280;
+}
+
+:root {
+  --bd-dot-color: #ddc9f2;
+  --bd-arrow-color: #8a52c4;
+}
+.dark {
+  --bd-dot-color: #3c1968;
+  --bd-arrow-color: #c4a3e8;
+}
+
+/* Brain dump dragging */
+body.bd-dragging .bd-drop-hint { display: flex !important; }
+body.bd-dragging [data-unsorted-panel="true"] * { pointer-events: none; }
+
+/* Time/date inputs on iOS */
+input[type="time"],
+input[type="date"] {
+  padding-right: 0.75rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Background colors for overscroll bounce */
+html { background-color: #faf7fd; }
+html.dark { background-color: #150828; }
+body { background-color: #faf7fd; }
+html.dark body { background-color: #150828; }
+
+/* Sticky header — works on iOS and Android */
+.sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  /* On iOS PWA: push below status bar. On desktop: keep 12px (= py-3) top padding */
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+}
+
+/* Prevent white gap above header during iOS overscroll bounce —
+   extends the header background color upward infinitely */
+.sticky-header::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 500px;
+  background: inherit;
+  pointer-events: none;
+}
+   push content below the iOS Dynamic Island / status bar in PWA mode.
+   Does nothing on desktop (safe-area-inset-top resolves to 0). */
+.fullscreen-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.font-pixel {
+  font-family: "Press Start 2P", "Courier New", monospace !important;
+}
+
+/* Remove tap highlight */
+* { -webkit-tap-highlight-color: transparent; }
